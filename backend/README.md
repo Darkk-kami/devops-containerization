@@ -42,3 +42,16 @@ Add Poetry to your PATH (if not automatically added):
 
 5. **Update configuration**:
    Ensure you update the necessary configurations in the `.env` file, particularly the database configuration.
+
+## Running with Docker
+
+### Deploying the backend using Docker:
+
+1. **Build the application image:**:
+    ```bash
+    sudo docker build  -t backend . 
+    ```
+2. **Run the container based on this image(Note: a postgres container must be running)**:
+    ```bash
+    sudo docker run -d -p 8000:8000 backend
+    ```
