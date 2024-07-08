@@ -13,8 +13,22 @@ Each directory has its own README file with detailed instructions specific to th
 
 ## Getting Started
 
+### Using Docker
+Ensure Docker and Docker Compose are installed on your machine. To start the entire stack using Docker Compose, run:
+```bash
+docker-compose up -d
+```
+To stop the services, run:
+```bash
+docker-compose down
+```
+
 To get started with this template, please follow the instructions in the respective directories:
 
 - [Frontend README](./frontend/README.md)
 - [Backend README](./backend/README.md)
+
+  ## Fast API Credentials
+  username: devops@hng.tech
+  password: devopsdevops
 
