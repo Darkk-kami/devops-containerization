@@ -14,7 +14,7 @@ Each directory has its own README file with detailed instructions specific to th
 ## Getting Started
 
 ### Using Docker
-**Ensure Docker and Docker Compose are installed on your machine:***
+**Ensure Docker and Docker Compose are installed on your machine:**
 Install docker:
 ```bash
 curl -fsSL https://get.docker.com -o get-docker.sh
@@ -41,7 +41,7 @@ To stop the services, run:
 sudo docker-compose down
 ```
 
-To get started with this template, please follow the instructions in the respective directories:
+**To get started with this template, please follow the instructions in the respective directories:**
 
 - [Frontend README](./frontend/README.md)
 - [Backend README](./backend/README.md)
