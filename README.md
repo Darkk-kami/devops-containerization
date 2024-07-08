@@ -14,13 +14,31 @@ Each directory has its own README file with detailed instructions specific to th
 ## Getting Started
 
 ### Using Docker
-Ensure Docker and Docker Compose are installed on your machine. To start the entire stack using Docker Compose, run:
+**Ensure Docker and Docker Compose are installed on your machine:***
+Install docker:
 ```bash
-docker-compose up -d
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+```
+Install docker-compose:
+```bash
+sudo curl -L "https://github.com/docker/compose/releases/download/v2.10.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+```
+Give permissions:
+```bash
+sudo chmod +x /usr/local/bin/docker-compose
+sudo usermod -aG docker $USER
+newgrp docker
+```
+
+
+**To start the entire stack using Docker Compose, run**:
+```bash
+sudo docker-compose up -d
 ```
 To stop the services, run:
 ```bash
-docker-compose down
+sudo docker-compose down
 ```
 
 To get started with this template, please follow the instructions in the respective directories:
