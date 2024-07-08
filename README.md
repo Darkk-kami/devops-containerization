@@ -16,16 +16,18 @@ Each directory has its own README file with detailed instructions specific to th
 ### Using Docker
 **Ensure Docker and Docker Compose are installed on your machine:**
 
-Install docker
+Install docker:
 ```bash
 curl -fsSL https://get.docker.com -o get-docker.sh
 sudo sh get-docker.sh
 ```
 
+
 Install docker-compose:
 ```bash
 sudo curl -L "https://github.com/docker/compose/releases/download/v2.10.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 ```
+
 
 Give permissions:
 ```bash
@@ -33,6 +35,8 @@ sudo chmod +x /usr/local/bin/docker-compose
 sudo usermod -aG docker $USER
 newgrp docker
 ```
+
+
 
 
 **To start the entire stack using Docker Compose, run**:
@@ -43,6 +47,8 @@ To stop the services, run:
 ```bash
 sudo docker-compose down
 ```
+
+
 
 **To get started with this template, please follow the instructions in the respective directories:**
 
