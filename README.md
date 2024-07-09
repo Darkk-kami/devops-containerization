@@ -55,7 +55,8 @@ sudo docker-compose down
 - [Frontend README](./frontend/README.md)
 - [Backend README](./backend/README.md)
 
-  ## Fast API Credentials
-  username: devops@hng.tech
-  password: devopsdevops
+### Fast API Credentials
+url: https://dwaynechima.mooo.com
+username: devops@hng.tech
+password: devopsdevops
 
