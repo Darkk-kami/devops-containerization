@@ -1,0 +1,107 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    env_file:
+      - frontend/.env
+    ports:
+      - '5173:5173'
+    networks:
+      - fastapi_net
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 500M
+
+  postgres:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - '5432:5432'
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    networks:
+      - fastapi_net
+    entrypoint: /bin/bash /fetch-secrets.sh
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1G
+      placement:
+        constraints: [node.role == manager]
+      restart_policy:
+        condition: on-failure
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.swarm
+    ports:
+      - '8000:8000'
+    depends_on:
+      - postgres
+    env_file:
+      - backend/.env.swarm
+    networks:
+      - fastapi_net
+    deploy:
+      replicas: 2
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1G
+
+  adminer:
+    image: adminer:latest
+    container_name: adminer
+    environment:
+      ADMINER_DEFAULT_SERVER: postgresdb
+    restart: always
+    ports:
+      - '8080:8080'
+    networks:
+      - fastapi_net
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 500M
+
+  proxy-manager:
+    image: 'jc21/nginx-proxy-manager:latest'
+    restart: unless-stopped
+    ports:
+      - '80:80'
+      - '8090:81'
+      - '443:443'
+    volumes:
+      - ./data:/data
+      - ./letsencrypt:/etc/letsencrypt
+    networks:
+      - fastapi_net
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1G
+
+networks:
+  fastapi_net:
+    driver: overlay
+
+volumes:
+  db-data:
+    driver: local
